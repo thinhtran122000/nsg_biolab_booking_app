@@ -121,7 +121,7 @@ flutter run
 
 <p> Notice: You must be start the emulator or real device to run app.</p>
 
-<h1> App Demo </h1>
+<h1> Project Demo </h1>
 <h3> Demo details: </h3>
 
 <ul>
