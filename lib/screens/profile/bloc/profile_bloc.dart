@@ -6,7 +6,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../../../utilities/validation/validation.dart';
 import '../profile_repository.dart';
 
 part 'profile_event.dart';

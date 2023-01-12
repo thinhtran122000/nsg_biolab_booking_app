@@ -32,23 +32,24 @@ class _NewBookingSelectTimeScreenState extends State<NewBookingSelectTimeScreen>
       child: BlocBuilder<NewBookingSelectTimeBloc, NewBookingSelectTimeState>(
         builder: (context, state) {
           var bloc = BlocProvider.of<NewBookingSelectTimeBloc>(context);
-          return Stack(
-            children: [
-              Scaffold(
-                appBar: CustomAppBar(
-                  titleAppBar: (widget.equipmentItem?.name ?? widget.meetingRoomItem?.name) ?? '',
-                  visibleAction: true,
-                  visibleLeading: true,
-                  onPressLeading: () => Navigator.of(context).pop(),
-                  onPressAction: () => bloc.add(ToggleDetailsEvent()),
-                  iconAction: Image.asset(
-                    ImagePath.infoIconOutline.assetName,
-                    width: 20,
-                    height: 20,
-                    color: blackColor,
-                  ),
-                ),
-                body: Column(
+          return Scaffold(
+            extendBody: true,
+            appBar: CustomAppBar(
+              titleAppBar: (widget.equipmentItem?.name ?? widget.meetingRoomItem?.name) ?? '',
+              visibleAction: true,
+              visibleLeading: true,
+              onPressLeading: () => Navigator.of(context).pop(),
+              onPressAction: () => bloc.add(ToggleDetailsEvent()),
+              iconAction: Image.asset(
+                ImagePath.infoIconOutline.assetName,
+                width: 20,
+                height: 20,
+                color: blackColor,
+              ),git
+            ),
+            body: Stack(
+              children: [
+                Column(
                   children: [
                     Container(
                       color: greenColor.withOpacity(0.3),
@@ -108,15 +109,15 @@ class _NewBookingSelectTimeScreenState extends State<NewBookingSelectTimeScreen>
                     ),
                   ],
                 ),
-              ),
-              Visibility(
-                visible: bloc.isOpen,
-                child: InfoBookingView(
-                  equipmentItem: widget.equipmentItem,
-                  meetingRoomItem: widget.meetingRoomItem,
+                Visibility(
+                  visible: bloc.isOpen,
+                  child: InfoBookingView(
+                    equipmentItem: widget.equipmentItem,
+                    meetingRoomItem: widget.meetingRoomItem,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),

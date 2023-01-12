@@ -53,8 +53,6 @@ class _InfoBookingViewState extends State<InfoBookingView> {
         builder: (context, state) {
           var bloc = BlocProvider.of<InfoBookingBloc>(context);
           return Positioned(
-            top: 70,
-            left: 0,
             width: MediaQuery.of(context).size.width,
             child: Material(
               child: Container(
