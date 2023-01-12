@@ -98,11 +98,11 @@
 ## 1. Clone project
 
 ```sh
-git clone git@gitlab.com:thinhtran122000/nsg-biolab-booking-app.git ~ Clone with SSH
+git clone git@github.com:thinhtran122000/nsg_biolab_booking_app.git ~ Clone with SSH
 ```
 
 ```sh
-git clone https://gitlab.com/thinhtran122000/nsg-biolab-booking-app.git ~ Clone with HTTPS
+git clone https://github.com/thinhtran122000/nsg_biolab_booking_app.git ~ Clone with HTTPS
 ```
 
 ## 2. Setup environment variable
