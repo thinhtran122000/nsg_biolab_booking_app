@@ -45,7 +45,7 @@ class _NewBookingSelectTimeScreenState extends State<NewBookingSelectTimeScreen>
                 width: 20,
                 height: 20,
                 color: blackColor,
-              ),git
+              ),
             ),
             body: Stack(
               children: [
