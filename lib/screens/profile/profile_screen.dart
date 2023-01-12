@@ -7,7 +7,6 @@ import 'package:shared_ui/shared_ui.dart';
 import '../../component/index.dart';
 import '../../utilities/rest_api_client/api_client.dart';
 import '../../utilities/shared_preferences/shared_preferences.dart';
-import '../../utilities/validation/validate.dart';
 import '../change_password/change_password_screen.dart';
 import '../login/login_screen.dart';
 import 'bloc/profile_bloc.dart';
@@ -27,13 +26,24 @@ class ProfileScreen extends StatelessWidget {
         child: BlocConsumer<ProfileBloc, ProfileState>(
           listener: (context, state) {
             if (state is ChangeProfileSuccess) {
-              Future.delayed(const Duration(seconds: 1), () {
-                Navigator.of(context).pop();
-                showDialogEdit(
+              Future.delayed(
+                const Duration(seconds: 1),
+                () => showDialogEdit(
                   context: context,
                   message: 'Your profile has been updated!',
-                );
-              });
+                ),
+              ).then(
+                (value) => Navigator.of(context).pop(),
+              );
+            } else if (state is ProfileError) {
+              Future.delayed(const Duration(seconds: 1), () {
+                Navigator.of(context).pop();
+              }).then(
+                (value) => showDialogEdit(
+                  context: context,
+                  message: state.errorMessage,
+                ),
+              );
             }
           },
           builder: (context, state) {
@@ -169,7 +179,14 @@ class ProfileScreen extends StatelessWidget {
                                 SaveButton(
                                   onPressed: () {
                                     showProgressIndicatorEditing(context);
-                                    editProfile(context);
+
+                                    bloc.add(
+                                      ChangeProfile(
+                                        name: bloc.nameController.text,
+                                        role: bloc.roleController.text,
+                                        phoneNumber: bloc.phoneController.text,
+                                      ),
+                                    );
                                   },
                                 ),
                               ],
@@ -203,24 +220,6 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  editProfile(BuildContext context) {
-    final bloc = BlocProvider.of<ProfileBloc>(context);
-    if (bloc.nameController.text.trim() == '') {
-      showDialogEdit(
-        context: context,
-        message: validateName(bloc.nameController.text.trim()),
-      );
-    } else {
-      bloc.add(
-        ChangeProfile(
-          name: bloc.nameController.text,
-          role: bloc.roleController.text,
-          phoneNumber: bloc.phoneController.text,
-        ),
-      );
-    }
   }
 
   logOut(BuildContext context) {
@@ -271,7 +270,7 @@ class ProfileScreen extends StatelessWidget {
             visibleConfirmButton: true,
             visibleDialogTitle: false,
             visibleMessage: true,
-            message: 'Your profile has been updated!',
+            message: message,
             labelConfirmButton: 'OK',
             colorConfirmButton: greenColor,
             onTapConfirmButton: () => Navigator.pop(context),

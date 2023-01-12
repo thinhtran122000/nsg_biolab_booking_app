@@ -36,12 +36,12 @@ String validateUpdatePassword(
   }
 }
 
-String validateName(String name) {
-  if (name.trim().isEmpty) {
-    return 'Name is required.';
-  } else {
-    return '';
-  }
-}
+// String validateName(String name) {
+//   if (name.trim().isEmpty) {
+//     return 'Name is required.';
+//   } else {
+//     return '';
+//   }
+// }
 
 

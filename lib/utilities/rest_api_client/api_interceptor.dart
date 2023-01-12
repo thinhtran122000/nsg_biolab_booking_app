@@ -47,16 +47,16 @@ class APIInterceptor extends QueuedInterceptor {
         }
       }
     }
-    log('=> REQUEST METHOD: ${options.method}');
-    log('=> PATH: ${options.baseUrl}${options.path}');
+    // log('=> REQUEST METHOD: ${options.method}');
+    // log('=> PATH: ${options.baseUrl}${options.path}');
     super.onRequest(options, handler);
   }
 
   @override
   void onResponse(Response response, ResponseInterceptorHandler handler) {
     log('=> RESPONSE CODE: ${response.statusCode}');
-    log('=> PATH: ${response.requestOptions.baseUrl}${response.requestOptions.path}');
-    log('=> RESPONSE DATA: ${response.data}');
+    // log('=> PATH: ${response.requestOptions.baseUrl}${response.requestOptions.path}');
+    // log('=> RESPONSE DATA: ${response.data}');
     super.onResponse(response, handler);
   }
 

@@ -139,30 +139,33 @@ class HomeBookingScreen extends StatelessWidget {
                       const SizedBox(height: 60),
                     ],
                   ),
-                  Positioned(
-                    top: 20,
-                    left: 140,
-                    child: Visibility(
-                      visible: localBloc.visibleButton,
-                      child: GestureDetector(
-                        onTap: () => localBloc.add(ScrollTopEvent(
-                          listOngoingBooking: state.listOngoingBooking,
-                          listUpcomingBooking: state.listUpcomingBooking,
-                        )),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            boxShadow: const [
-                              BoxShadow(blurRadius: 1),
-                            ],
-                            shape: BoxShape.circle,
-                            color: whiteColor,
-                          ),
-                          child: RotatedBox(
-                            quarterTurns: -1,
-                            child: Icon(
-                              Icons.double_arrow_rounded,
-                              color: greenColor,
-                              size: 40,
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: Visibility(
+                        visible: localBloc.visibleButton,
+                        child: GestureDetector(
+                          onTap: () => localBloc.add(ScrollTopEvent(
+                            listOngoingBooking: state.listOngoingBooking,
+                            listUpcomingBooking: state.listUpcomingBooking,
+                          )),
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(blurRadius: 1),
+                              ],
+                              shape: BoxShape.circle,
+                              color: whiteColor,
+                            ),
+                            child: RotatedBox(
+                              quarterTurns: -1,
+                              child: Icon(
+                                Icons.double_arrow_rounded,
+                                color: greenColor,
+                                size: 40,
+                              ),
                             ),
                           ),
                         ),

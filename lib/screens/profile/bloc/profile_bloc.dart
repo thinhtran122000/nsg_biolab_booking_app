@@ -6,6 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../utilities/validation/validation.dart';
 import '../profile_repository.dart';
 
 part 'profile_event.dart';
@@ -62,14 +63,22 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
   FutureOr<void> _onChangeProfile(ChangeProfile event, Emitter<ProfileState> emit) async {
     try {
-      final response =
-          await profileReponstory.changeProfile(event.name, event.role, event.phoneNumber ?? '');
-      avatar = response.object.avatar ?? '';
-      nameController = TextEditingController(text: response.object.fullName);
-      roleController = TextEditingController(text: response.object.role);
-      phoneController = TextEditingController(text: response.object.phoneNumber);
-      emit(ChangeProfileSuccess());
-      emit(ProfileSuccess());
+      if (nameController.text.isEmpty) {
+        emit(ProfileError(errorMessage: 'User name cannot be empty!'));
+      } else {
+        if (nameController.text.trim() == '') {
+          emit(ProfileError(errorMessage: 'Name is required!'));
+        } else {
+          final response = await profileReponstory.changeProfile(
+              event.name, event.role, event.phoneNumber ?? '');
+          avatar = response.object.avatar ?? '';
+          nameController = TextEditingController(text: response.object.fullName);
+          roleController = TextEditingController(text: response.object.role);
+          phoneController = TextEditingController(text: response.object.phoneNumber);
+          emit(ChangeProfileSuccess());
+          emit(ProfileSuccess());
+        }
+      }
     } catch (e) {
       emit(ProfileError(errorMessage: e.toString()));
     }
