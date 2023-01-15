@@ -36,7 +36,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       roleController.text = response.object.role ?? '';
       phoneController.text = response.object.phoneNumber ?? '';
       avatar = response.object.avatar;
-      log('---$avatar');
       emit(ProfileSuccess());
     } catch (e) {
       emit(ProfileError(errorMessage: e.toString()));

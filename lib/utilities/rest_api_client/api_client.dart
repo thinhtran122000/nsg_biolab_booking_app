@@ -42,7 +42,7 @@ class RestAPIClient extends APIClient {
       } else if (e.type == DioErrorType.response) {
         switch (e.response?.statusCode) {
           case 400:
-            throw Exception('Bad Request');
+            throw e.response?.data['message'] ?? '';
           case 401:
             throw Exception('Authorization Exception');
           case 403:
