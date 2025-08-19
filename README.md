@@ -10,9 +10,7 @@
         </a>
     </span> 
 </p>
- <p align="center">
-  <img src="https://nsgbio.com/wp-content/uploads/2021/08/nsgb-aioseo-logo-1.jpg" alt="Sublime's custom image">
-</p> 
+
   <h1> Version </h1>
 <ul>
   <li>
