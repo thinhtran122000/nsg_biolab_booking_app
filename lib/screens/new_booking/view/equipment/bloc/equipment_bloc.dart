@@ -107,7 +107,10 @@ class EquipmentBloc extends Bloc<EquipmentEvent, EquipmentState> {
         emit(EquipmentSuccess(listEquipment: newListEquipment));
       }
     } catch (e) {
-      emit(EquipmentError(errorMessage: e.toString(), listEquipment: state.listEquipment));
+      emit(EquipmentError(
+        errorMessage: e.toString(),
+        listEquipment: state.listEquipment,
+      ));
     }
   }
 

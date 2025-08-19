@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:codebase/screens/new_booking_review/new_booking_review_repository.dart';
 import 'package:domain/domain.dart';
+import 'package:nsg_biolab_booking_app/screens/new_booking_review/new_booking_review_repository.dart';
 
 part 'new_booking_review_event.dart';
 part 'new_booking_review_state.dart';
@@ -28,8 +28,7 @@ class NewBookingReviewBloc extends Bloc<NewBookingReviewEvent, NewBookingReviewS
     );
   }
 
-  FutureOr<void> _onAddBookingEvent(
-      AddBookingEvent event, Emitter<NewBookingReviewState> emit) async {
+  FutureOr<void> _onAddBookingEvent(AddBookingEvent event, Emitter<NewBookingReviewState> emit) async {
     try {
       var result = await newBookingReviewRepository.addNewBooking(
         orderableType: event.orderableType,

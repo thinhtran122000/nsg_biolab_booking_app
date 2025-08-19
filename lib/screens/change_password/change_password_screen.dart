@@ -1,7 +1,7 @@
-import 'package:codebase/screens/change_password/change_password_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nsg_biolab_booking_app/screens/change_password/change_password_repository.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 import '../../utilities/rest_api_client/api_client.dart';
@@ -140,8 +140,7 @@ class ChangePasswordScreen extends StatelessWidget {
     );
   }
 
-  showDialogNotify(
-      {required BuildContext context, String? message, void Function()? onTapConfirmButton}) {
+  showDialogNotify({required BuildContext context, String? message, void Function()? onTapConfirmButton}) {
     Future.delayed(
       const Duration(seconds: 1),
       () {
@@ -153,7 +152,7 @@ class ChangePasswordScreen extends StatelessWidget {
             visibleDialogTitle: false,
             visibleMessage: true,
             colorConfirmButton: greenColor,
-            message: message, 
+            message: message,
             labelConfirmButton: 'OK',
             onTapConfirmButton: onTapConfirmButton,
           ),

@@ -1,13 +1,13 @@
 import 'dart:async';
 
-import 'package:codebase/blocs/bloc/global_bloc.dart';
-import 'package:codebase/screens/edit_booking/edit_booking_repository.dart';
-import 'package:codebase/utilities/index.dart';
-import 'package:codebase/utilities/rest_api_client/api_client.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nsg_biolab_booking_app/blocs/bloc/global_bloc.dart';
+import 'package:nsg_biolab_booking_app/screens/edit_booking/edit_booking_repository.dart';
+import 'package:nsg_biolab_booking_app/utilities/index.dart';
+import 'package:nsg_biolab_booking_app/utilities/rest_api_client/api_client.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 import 'bloc/edit_booking_bloc.dart';
@@ -50,15 +50,13 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
           if (state is EditBookingDeleteSuccess) {
             BlocProvider.of<GlobalBloc>(context)
                 .add(GlobalDeleteUpcomingBooking(upcomingBooking: state.upcomingBooking!));
-            Future.delayed(const Duration(milliseconds: 500),
-                () => Navigator.popUntil(context, (route) => route.isFirst));
+            Future.delayed(
+                const Duration(milliseconds: 500), () => Navigator.popUntil(context, (route) => route.isFirst));
           } else if (state is EditBookingUpdateSuccess) {
             if (state.ongoingBooking != null) {
-              BlocProvider.of<GlobalBloc>(context)
-                  .add(GlobalUpdateBooking(ongoingBooking: state.ongoingBooking));
+              BlocProvider.of<GlobalBloc>(context).add(GlobalUpdateBooking(ongoingBooking: state.ongoingBooking));
             } else {
-              BlocProvider.of<GlobalBloc>(context)
-                  .add(GlobalUpdateBooking(upcomingBooking: state.upcomingBooking));
+              BlocProvider.of<GlobalBloc>(context).add(GlobalUpdateBooking(upcomingBooking: state.upcomingBooking));
             }
             Future.delayed(const Duration(seconds: 1), () => Navigator.of(context).pop());
           } else if (state is EditBookingUpdateError) {
@@ -86,9 +84,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     TextWidgetEditBooking(
-                      data: getOrderbleTypeBooking(context).contains('EquipmentItem')
-                          ? 'Equipment'
-                          : 'Room',
+                      data: getOrderbleTypeBooking(context).contains('EquipmentItem') ? 'Equipment' : 'Room',
                       textStyle: largeBlackLessBlurTextStyle,
                     ),
                     const SizedBox(height: 7),
@@ -130,12 +126,10 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
                           : const AlertIcon(),
                       hasBackGroundColor: state.ongoingBooking != null ? true : false,
                       backgroundColor: superLightGreyColor,
-                      onTapDate: state.ongoingBooking != null
-                          ? null
-                          : () async => await showFromDatePicker(context: context),
-                      onTapTime: state.ongoingBooking != null
-                          ? null
-                          : () async => await showFromTimePicker(context: context),
+                      onTapDate:
+                          state.ongoingBooking != null ? null : () async => await showFromDatePicker(context: context),
+                      onTapTime:
+                          state.ongoingBooking != null ? null : () async => await showFromTimePicker(context: context),
                       childTextDate: TextWidgetEditBooking(
                         data: Utilities().dateFormat(fromDate, 'dd MMM yyyy'),
                         textStyle: contentEditBookingTextStyle(blackColor),
@@ -143,9 +137,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
                       childTextTime: TextWidgetEditBooking(
                         data: Utilities().timeFormat(fromTime),
                         textStyle: contentEditBookingTextStyle(
-                          Utilities().checkDateTime(fromDate, toDate, fromTime, toTime)
-                              ? blackColor
-                              : redColor,
+                          Utilities().checkDateTime(fromDate, toDate, fromTime, toTime) ? blackColor : redColor,
                         ),
                       ),
                     ),
@@ -167,9 +159,7 @@ class _EditBookingScreenState extends State<EditBookingScreen> {
                       childTextTime: TextWidgetEditBooking(
                         data: Utilities().timeFormat(toTime),
                         textStyle: contentEditBookingTextStyle(
-                          Utilities().checkDateTime(fromDate, toDate, fromTime, toTime)
-                              ? blackColor
-                              : redColor,
+                          Utilities().checkDateTime(fromDate, toDate, fromTime, toTime) ? blackColor : redColor,
                         ),
                       ),
                     ),

@@ -1,7 +1,7 @@
-import 'package:codebase/screens/new_booking/index.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nsg_biolab_booking_app/screens/new_booking/index.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_ui/shared_ui.dart';
 
@@ -18,8 +18,8 @@ class NewMeetingRoomView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => MeetingRoomBloc(NewBookingRepository(restApiClient: RestAPIClient()))
-        ..add(FetchDataMeetingRoomEvent()),
+      create: (context) =>
+          MeetingRoomBloc(NewBookingRepository(restApiClient: RestAPIClient()))..add(FetchDataMeetingRoomEvent()),
       child: BlocListener<MeetingRoomBloc, MeetingRoomState>(
         listener: (context, state) {
           if (state is MeetingRoomSuccess) {
@@ -116,8 +116,7 @@ class NewMeetingRoomView extends StatelessWidget {
     var globalBloc = BlocProvider.of<GlobalBloc>(context);
     var itemListMeetingRoom = globalBloc.state.listNewMeetingRoom[index];
     String nameMeetingRoom = itemListMeetingRoom.name ?? '';
-    Color? colorTagMeetingRoom =
-        Color(int.parse('0xff${itemListMeetingRoom.site?.colorTag?.replaceAll('#', '')}'));
+    Color? colorTagMeetingRoom = Color(int.parse('0xff${itemListMeetingRoom.site?.colorTag?.replaceAll('#', '')}'));
     String? levelMeetingRoom = itemListMeetingRoom.site?.level.toString();
     String? siteNameMeetingRoom = itemListMeetingRoom.site?.name;
     return ItemMeetingRoomWidget(

@@ -32,27 +32,30 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  countDownTime() async => Timer(
-        const Duration(seconds: 1),
-        () async {
-          if (await getToken() != null) {
-            Navigator.pushAndRemoveUntil(
-                context,
-                VerticalNavigatorRoute(
-                  page: const NavigationScreen(),
-                  begin: const Offset(0, 1),
-                ),
-                (route) => false);
-          } else {
-            Navigator.pushAndRemoveUntil(
+  countDownTime() async {
+    final a = await getToken();
+    return Timer(
+      const Duration(seconds: 1),
+      () {
+        if (a != null) {
+          Navigator.pushAndRemoveUntil(
               context,
               VerticalNavigatorRoute(
-                page: const LoginScreen(),
-                begin: const Offset(0, -1),
+                page: const NavigationScreen(),
+                begin: const Offset(0, 1),
               ),
-              (route) => false,
-            );
-          }
-        },
-      );
+              (route) => false);
+        } else {
+          Navigator.pushAndRemoveUntil(
+            context,
+            VerticalNavigatorRoute(
+              page: const LoginScreen(),
+              begin: const Offset(0, -1),
+            ),
+            (route) => false,
+          );
+        }
+      },
+    );
+  }
 }

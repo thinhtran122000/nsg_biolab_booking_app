@@ -72,9 +72,7 @@ class EquipmentBloc extends Bloc<EquipmentEvent, EquipmentState> {
     try {
       Future.delayed(
         const Duration(milliseconds: 300),
-        () {
-          canTapLike = false;
-        },
+        () => canTapLike = false,
       ).then((value) => canTapLike = true);
       await favouriteBookingRepository.toggleLikeFavouriteEquipmentItem(
           id: event.favouriteEquipment.id ?? 0);

@@ -9,8 +9,8 @@ class RestAPIClient extends APIClient {
   factory RestAPIClient() => _instance;
   final Dio dio = Dio(
     BaseOptions(
-      baseUrl: BaseURLs.development.schemes + BaseURLs.development.basePath,
-    ),
+        // baseUrl: BaseURLs.development.schemes + BaseURLs.development.basePath,
+        baseUrl: 'https://api.themoviedb.org/3'),
   )..interceptors.add(APIInterceptor());
 
   @override

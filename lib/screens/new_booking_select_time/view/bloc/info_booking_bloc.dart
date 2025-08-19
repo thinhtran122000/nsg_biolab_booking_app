@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:codebase/screens/new_booking_select_time/new_booking_select_time_repository.dart';
 import 'package:domain/domain.dart';
+import 'package:nsg_biolab_booking_app/screens/new_booking_select_time/new_booking_select_time_repository.dart';
 
 part 'info_booking_event.dart';
 part 'info_booking_state.dart';
@@ -19,8 +19,7 @@ class InfoBookingBloc extends Bloc<InfoBookingEvent, InfoBookingState> {
     on<ToggleLikeInfoBookingEvent>(_onToggleLikeInfoBookingEvent);
   }
 
-  FutureOr<void> _onFetchDataInfoBookingEvent(
-      FetchDataInfoBookingEvent event, Emitter<InfoBookingState> emit) {
+  FutureOr<void> _onFetchDataInfoBookingEvent(FetchDataInfoBookingEvent event, Emitter<InfoBookingState> emit) {
     try {
       emit(
         InfoBookingSuccess(
@@ -49,8 +48,8 @@ class InfoBookingBloc extends Bloc<InfoBookingEvent, InfoBookingState> {
         },
       ).then((value) => canTapLike = true);
       if (state.equipmentItem != null) {
-        var toggleLikeEquipmentResult = await newBookingSelectTimeRepository
-            .toggleLikeInfoEquipmentItem(id: event.equipmentItem?.id ?? 0);
+        var toggleLikeEquipmentResult =
+            await newBookingSelectTimeRepository.toggleLikeInfoEquipmentItem(id: event.equipmentItem?.id ?? 0);
         state.equipmentItem!.isLiked = toggleLikeEquipmentResult.object.isLiked;
         emit(
           InfoBookingLikeSuccess(
@@ -59,8 +58,8 @@ class InfoBookingBloc extends Bloc<InfoBookingEvent, InfoBookingState> {
           ),
         );
       } else {
-        var toggleLikeMeetingRoomResult = await newBookingSelectTimeRepository
-            .toggleLikeInfoMeetingRoomsItem(id: event.meetingRoomItem?.id ?? 0);
+        var toggleLikeMeetingRoomResult =
+            await newBookingSelectTimeRepository.toggleLikeInfoMeetingRoomsItem(id: event.meetingRoomItem?.id ?? 0);
         state.meetingRoomItem!.isLiked = toggleLikeMeetingRoomResult.object.isLiked;
         emit(
           InfoBookingLikeSuccess(

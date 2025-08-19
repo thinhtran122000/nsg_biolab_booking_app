@@ -1,17 +1,16 @@
-import 'package:codebase/bloc_obsever/bloc_obsever.dart';
-import 'package:codebase/blocs/bloc/global_bloc.dart';
-import 'package:codebase/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_config/flutter_config.dart';
+import 'package:nsg_biolab_booking_app/bloc_obsever/bloc_obsever.dart';
+import 'package:nsg_biolab_booking_app/blocs/bloc/global_bloc.dart';
+import 'package:nsg_biolab_booking_app/screens/splash/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await FlutterConfig.loadEnvVariables();
-  SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(statusBarColor: Colors.transparent));
   Bloc.observer = SimpleBlocObserver();
   runApp(const MyApp());
 }

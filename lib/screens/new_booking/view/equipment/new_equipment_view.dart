@@ -1,8 +1,8 @@
-import 'package:codebase/screens/new_booking/index.dart';
 import 'package:domain/models/sites/filter_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nsg_biolab_booking_app/screens/new_booking/index.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_ui/shared_ui.dart';
 
@@ -72,10 +72,10 @@ class NewEquipmentView extends StatelessWidget {
                           enablePullDown: true,
                           header: MaterialClassicHeader(color: greenColor),
                           footer: const LoadMoreWidget(),
-                          onRefresh: () => localBloc.add(FetchDataEquipmentEvent(
-                              levels: filterModel?.levels, sites: filterModel?.sites)),
-                          onLoading: () => localBloc.add(LoadMoreEquipmentEvent(
-                              levels: filterModel?.levels, sites: filterModel?.sites)),
+                          onRefresh: () => localBloc
+                              .add(FetchDataEquipmentEvent(levels: filterModel?.levels, sites: filterModel?.sites)),
+                          onLoading: () => localBloc
+                              .add(LoadMoreEquipmentEvent(levels: filterModel?.levels, sites: filterModel?.sites)),
                           controller: localBloc.equipmentRefreshController,
                           child: SizedBox(
                             child: ListView.separated(
@@ -124,8 +124,7 @@ class NewEquipmentView extends StatelessWidget {
     var globalBloc = BlocProvider.of<GlobalBloc>(context);
     var itemListEquipment = globalBloc.state.listNewEquipment[index];
     String nameEquipment = itemListEquipment.name ?? '';
-    Color? colorTagEquipment =
-        Color(int.parse('0xff${itemListEquipment.site?.colorTag?.replaceAll('#', '')}'));
+    Color? colorTagEquipment = Color(int.parse('0xff${itemListEquipment.site?.colorTag?.replaceAll('#', '')}'));
     String? levelEquipment = itemListEquipment.site?.level.toString();
     String? siteNameEquipment = itemListEquipment.site?.name;
     return ItemEquipmentWidget(

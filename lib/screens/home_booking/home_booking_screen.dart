@@ -1,8 +1,8 @@
-import 'package:codebase/blocs/bloc/global_bloc.dart';
-import 'package:codebase/screens/details_meeting_room_booking/details_meeting_room_booking_screen.dart';
 import 'package:domain/domain.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nsg_biolab_booking_app/blocs/bloc/global_bloc.dart';
+import 'package:nsg_biolab_booking_app/screens/details_meeting_room_booking/details_meeting_room_booking_screen.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_ui/shared_ui.dart';
 
@@ -77,10 +77,8 @@ class HomeBookingScreen extends StatelessWidget {
                               children: [
                                 BackGroundWidget(
                                   visibleTitle: true,
-                                  visibilityBackGround: (listUpcomingBooking.isNotEmpty ||
-                                          listOngoingBooking.isNotEmpty)
-                                      ? false
-                                      : true,
+                                  visibilityBackGround:
+                                      (listUpcomingBooking.isNotEmpty || listOngoingBooking.isNotEmpty) ? false : true,
                                   notificationData: 'You have no active bookings',
                                   startMessageRequiredData: 'Click the',
                                   endMessageRequiredData: 'below to add new bookings',
@@ -187,16 +185,14 @@ class HomeBookingScreen extends StatelessWidget {
     String? levelOngoing = itemListOngoingBooking.orderable?.site?.level.toString();
     String? siteNameOngoing = itemListOngoingBooking.orderable?.site?.name;
     String orderableNameOngoing = itemListOngoingBooking.orderable?.name ?? '';
-    Color? colorTagOngoing = Color(
-        int.parse('0xff${itemListOngoingBooking.orderable?.site?.colorTag?.replaceAll('#', '')}'));
-    String startDateOngoing =
-        Utilities().dateFormat(itemListOngoingBooking.startDate ?? DateTime.now(), 'MMM d (EEE)');
-    String endDateOngoing =
-        Utilities().dateFormat(itemListOngoingBooking.endDate ?? DateTime.now(), 'MMM d (EEE)');
-    String startTimeOngoing = Utilities()
-        .timeFormat(Utilities().convertDoubleToTime(itemListOngoingBooking.startTime ?? 0));
-    String endTimeOngoing = Utilities()
-        .timeFormat(Utilities().convertDoubleToTime(itemListOngoingBooking.endTime ?? 0));
+    Color? colorTagOngoing =
+        Color(int.parse('0xff${itemListOngoingBooking.orderable?.site?.colorTag?.replaceAll('#', '')}'));
+    String startDateOngoing = Utilities().dateFormat(itemListOngoingBooking.startDate ?? DateTime.now(), 'MMM d (EEE)');
+    String endDateOngoing = Utilities().dateFormat(itemListOngoingBooking.endDate ?? DateTime.now(), 'MMM d (EEE)');
+    String startTimeOngoing =
+        Utilities().timeFormat(Utilities().convertDoubleToTime(itemListOngoingBooking.startTime ?? 0));
+    String endTimeOngoing =
+        Utilities().timeFormat(Utilities().convertDoubleToTime(itemListOngoingBooking.endTime ?? 0));
     return ItemBookingWidget(
       orderableNameData: orderableNameOngoing,
       colorTagBooking: colorTagOngoing,
@@ -223,16 +219,15 @@ class HomeBookingScreen extends StatelessWidget {
     String? levelUpcoming = itemListUpcomingBooking.orderable?.site?.level.toString();
     String? siteNameUpcoming = itemListUpcomingBooking.orderable?.site?.name;
     String orderableNameUpcoming = itemListUpcomingBooking.orderable?.name ?? '';
-    Color? colorTagUpcoming = Color(
-        int.parse('0xff${itemListUpcomingBooking.orderable?.site?.colorTag?.replaceAll('#', '')}'));
+    Color? colorTagUpcoming =
+        Color(int.parse('0xff${itemListUpcomingBooking.orderable?.site?.colorTag?.replaceAll('#', '')}'));
     String startDateUpcoming =
         Utilities().dateFormat(itemListUpcomingBooking.startDate ?? DateTime.now(), 'MMM d (EEE)');
-    String endDateUpcoming =
-        Utilities().dateFormat(itemListUpcomingBooking.endDate ?? DateTime.now(), 'MMM d (EEE)');
-    String startTimeUpcoming = Utilities()
-        .timeFormat(Utilities().convertDoubleToTime(itemListUpcomingBooking.startTime ?? 0));
-    String endTimeUpcoming = Utilities()
-        .timeFormat(Utilities().convertDoubleToTime(itemListUpcomingBooking.endTime ?? 0));
+    String endDateUpcoming = Utilities().dateFormat(itemListUpcomingBooking.endDate ?? DateTime.now(), 'MMM d (EEE)');
+    String startTimeUpcoming =
+        Utilities().timeFormat(Utilities().convertDoubleToTime(itemListUpcomingBooking.startTime ?? 0));
+    String endTimeUpcoming =
+        Utilities().timeFormat(Utilities().convertDoubleToTime(itemListUpcomingBooking.endTime ?? 0));
     return ItemBookingWidget(
       orderableNameData: orderableNameUpcoming,
       colorTagBooking: colorTagUpcoming,

@@ -1,9 +1,9 @@
-import 'package:codebase/blocs/bloc/global_bloc.dart';
-import 'package:codebase/utilities/rest_api_client/api_client.dart';
 import 'package:domain/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nsg_biolab_booking_app/blocs/bloc/global_bloc.dart';
+import 'package:nsg_biolab_booking_app/utilities/rest_api_client/api_client.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 import '../new_booking_select_time_repository.dart';
@@ -23,14 +23,13 @@ class _InfoBookingViewState extends State<InfoBookingView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          InfoBookingBloc(NewBookingSelectTimeRepository(restApiClient: RestAPIClient()))
-            ..add(
-              FetchDataInfoBookingEvent(
-                equipmentItem: widget.equipmentItem,
-                meetingRoomItem: widget.meetingRoomItem,
-              ),
-            ),
+      create: (context) => InfoBookingBloc(NewBookingSelectTimeRepository(restApiClient: RestAPIClient()))
+        ..add(
+          FetchDataInfoBookingEvent(
+            equipmentItem: widget.equipmentItem,
+            meetingRoomItem: widget.meetingRoomItem,
+          ),
+        ),
       child: BlocConsumer<InfoBookingBloc, InfoBookingState>(
         listener: (context, state) {
           if (state is InfoBookingLikeSuccess) {

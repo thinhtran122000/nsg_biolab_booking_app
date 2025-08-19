@@ -1,9 +1,9 @@
 import 'dart:developer';
 
-import 'package:codebase/blocs/bloc/global_bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nsg_biolab_booking_app/blocs/bloc/global_bloc.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_ui/shared_ui.dart';
 
@@ -20,8 +20,8 @@ class FavouriteEquipmentView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => EquipmentBloc(FavouriteBookingRepository(restApiClient: RestAPIClient()))
-        ..add(FetchDataEquipmentEvent()),
+      create: (context) =>
+          EquipmentBloc(FavouriteBookingRepository(restApiClient: RestAPIClient()))..add(FetchDataEquipmentEvent()),
       child: BlocListener<EquipmentBloc, EquipmentState>(
         listener: (context, state) {
           log('---${state.runtimeType.toString()}');
@@ -100,8 +100,7 @@ class FavouriteEquipmentView extends StatelessWidget {
     var globalBloc = BlocProvider.of<GlobalBloc>(context);
     var itemListEquipment = globalBloc.state.listEquipment[index];
     String nameEquipment = itemListEquipment.name ?? '';
-    Color? colorTagEquipment =
-        Color(int.parse('0xff${itemListEquipment.site?.colorTag?.replaceAll('#', '')}'));
+    Color? colorTagEquipment = Color(int.parse('0xff${itemListEquipment.site?.colorTag?.replaceAll('#', '')}'));
     String? levelEquipment = itemListEquipment.site?.level.toString();
     String? siteNameEquipment = itemListEquipment.site?.name;
     return ItemEquipmentWidget(

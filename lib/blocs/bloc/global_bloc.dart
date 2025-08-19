@@ -2,8 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:codebase/utilities/index.dart';
 import 'package:domain/models/models.dart';
+import 'package:nsg_biolab_booking_app/utilities/index.dart';
 
 part 'global_event.dart';
 part 'global_state.dart';
@@ -39,8 +39,7 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
     ));
   }
 
-  FutureOr<void> _onGlobalToggleLikeEquipment(
-      GlobalToggleLikeEquipment event, Emitter<GlobalState> emit) {
+  FutureOr<void> _onGlobalToggleLikeEquipment(GlobalToggleLikeEquipment event, Emitter<GlobalState> emit) {
     var newListEquipment = [...state.listEquipment];
     var index = state.listEquipment.indexWhere((element) => element.id == event.equipmentItem.id);
     if (index >= 0) {
@@ -62,11 +61,9 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
     );
   }
 
-  FutureOr<void> _onGlobalToggleLikeMeetingRoom(
-      GlobalToggleLikeMeetingRoom event, Emitter<GlobalState> emit) {
+  FutureOr<void> _onGlobalToggleLikeMeetingRoom(GlobalToggleLikeMeetingRoom event, Emitter<GlobalState> emit) {
     var newListMeetingRoom = [...state.listMeetingRoom];
-    var index =
-        state.listMeetingRoom.indexWhere((element) => element.id == event.meetingRoomItem.id);
+    var index = state.listMeetingRoom.indexWhere((element) => element.id == event.meetingRoomItem.id);
     if (index >= 0) {
       newListMeetingRoom.removeAt(index);
     } else {
@@ -86,11 +83,9 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
     );
   }
 
-  FutureOr<void> _onGlobalDeleteUpcomingBooking(
-      GlobalDeleteUpcomingBooking event, Emitter<GlobalState> emit) {
+  FutureOr<void> _onGlobalDeleteUpcomingBooking(GlobalDeleteUpcomingBooking event, Emitter<GlobalState> emit) {
     var newListUpcomingBooking = [...state.listUpcomingBooking];
-    var index =
-        state.listUpcomingBooking.indexWhere((element) => element.id == event.upcomingBooking.id);
+    var index = state.listUpcomingBooking.indexWhere((element) => element.id == event.upcomingBooking.id);
     if (index >= 0) {
       newListUpcomingBooking.removeAt(index);
     }
@@ -108,14 +103,12 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
     );
   }
 
-  FutureOr<void> _onGlobalUpdateUpcomingBooking(
-      GlobalUpdateBooking event, Emitter<GlobalState> emit) {
+  FutureOr<void> _onGlobalUpdateUpcomingBooking(GlobalUpdateBooking event, Emitter<GlobalState> emit) {
     var newListOngoingBooking = [...state.listOngoingBooking];
     var newListUpcomingBooking = [...state.listUpcomingBooking];
 
     if (newListOngoingBooking.isNotEmpty) {
-      var indexOngoing =
-          newListOngoingBooking.indexWhere((element) => element.id == event.ongoingBooking?.id);
+      var indexOngoing = newListOngoingBooking.indexWhere((element) => element.id == event.ongoingBooking?.id);
       if (indexOngoing >= 0) {
         newListOngoingBooking[indexOngoing] = event.ongoingBooking!;
       }
@@ -132,8 +125,7 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
         ),
       );
     } else {
-      var indexUpcoming =
-          newListUpcomingBooking.indexWhere((element) => element.id == event.upcomingBooking?.id);
+      var indexUpcoming = newListUpcomingBooking.indexWhere((element) => element.id == event.upcomingBooking?.id);
       if (indexUpcoming >= 0) {
         newListUpcomingBooking[indexUpcoming] = event.upcomingBooking!;
       }
@@ -169,36 +161,28 @@ class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
         ));
       } else {
         var maxDateItem = newListUpcomingBooking.reduce((value, element) =>
-            (value.startDate ?? DateTime.now()).isAfter((element.startDate ?? DateTime.now()))
-                ? value
-                : element);
+            (value.startDate ?? DateTime.now()).isAfter((element.startDate ?? DateTime.now())) ? value : element);
         var maxTimeItem = newListUpcomingBooking.reduce((value, element) => Utilities()
                 .convertDoubleToTime(value.startTime ?? 0)
                 .isAfter((Utilities().convertDoubleToTime(element.startTime ?? 0)))
             ? value
             : element);
-        if ((event.upcomingBooking?.startDate ?? DateTime.now())
-            .isBefore((maxDateItem.startDate ?? DateTime.now()))) {
-          newListUpcomingBooking.insert(  
-              newListUpcomingBooking.indexOf(maxDateItem), event.upcomingBooking!);
+        if ((event.upcomingBooking?.startDate ?? DateTime.now()).isBefore((maxDateItem.startDate ?? DateTime.now()))) {
+          newListUpcomingBooking.insert(newListUpcomingBooking.indexOf(maxDateItem), event.upcomingBooking!);
         } else if ((event.upcomingBooking?.startDate ?? DateTime.now())
             .isAfter((maxDateItem.startDate ?? DateTime.now()))) {
-          newListUpcomingBooking.insert(
-              newListUpcomingBooking.indexOf(maxDateItem) + 1, event.upcomingBooking!);
+          newListUpcomingBooking.insert(newListUpcomingBooking.indexOf(maxDateItem) + 1, event.upcomingBooking!);
         } else {
           if (Utilities()
               .convertDoubleToTime(event.upcomingBooking?.startTime ?? 0)
               .isBefore(Utilities().convertDoubleToTime(maxTimeItem.startTime ?? 0))) {
-            newListUpcomingBooking.insert(
-                newListUpcomingBooking.indexOf(maxTimeItem), event.upcomingBooking!);
+            newListUpcomingBooking.insert(newListUpcomingBooking.indexOf(maxTimeItem), event.upcomingBooking!);
           } else if (Utilities()
               .convertDoubleToTime(event.upcomingBooking?.startTime ?? 0)
               .isAfter(Utilities().convertDoubleToTime(maxTimeItem.startTime ?? 0))) {
-            newListUpcomingBooking.insert(
-                newListUpcomingBooking.indexOf(maxTimeItem) + 1, event.upcomingBooking!);
+            newListUpcomingBooking.insert(newListUpcomingBooking.indexOf(maxTimeItem) + 1, event.upcomingBooking!);
           } else {
-            newListUpcomingBooking.insert(
-                newListUpcomingBooking.indexOf(maxTimeItem) + 1, event.upcomingBooking!);
+            newListUpcomingBooking.insert(newListUpcomingBooking.indexOf(maxTimeItem) + 1, event.upcomingBooking!);
           }
         }
       }

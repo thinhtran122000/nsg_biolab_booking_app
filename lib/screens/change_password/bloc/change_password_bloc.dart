@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:codebase/screens/change_password/change_password_repository.dart';
-import 'package:codebase/utilities/validation/validate.dart';
 import 'package:flutter/material.dart';
+import 'package:nsg_biolab_booking_app/screens/change_password/change_password_repository.dart';
+import 'package:nsg_biolab_booking_app/utilities/validation/validate.dart';
 
 part 'change_password_event.dart';
 part 'change_password_state.dart';

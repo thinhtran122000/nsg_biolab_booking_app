@@ -1,9 +1,9 @@
-import 'package:codebase/blocs/bloc/global_bloc.dart';
-import 'package:codebase/screens/filter_search_booking/bloc/filter_search_bloc.dart';
-import 'package:codebase/screens/filter_search_booking/filter_search_booking_repository.dart';
 import 'package:domain/models/sites/filter_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nsg_biolab_booking_app/blocs/bloc/global_bloc.dart';
+import 'package:nsg_biolab_booking_app/screens/filter_search_booking/bloc/filter_search_bloc.dart';
+import 'package:nsg_biolab_booking_app/screens/filter_search_booking/filter_search_booking_repository.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 import '../../utilities/rest_api_client/api_client.dart';

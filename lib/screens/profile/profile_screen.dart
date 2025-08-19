@@ -1,7 +1,7 @@
-import 'package:codebase/screens/profile/widget/bottom_sheet_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nsg_biolab_booking_app/screens/profile/widget/bottom_sheet_widget.dart';
 import 'package:shared_ui/shared_ui.dart';
 
 import '../../component/index.dart';
@@ -21,8 +21,7 @@ class ProfileScreen extends StatelessWidget {
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: BlocProvider(
-        create: (context) =>
-            ProfileBloc(ProfileReponstory(RestAPIClient()))..add(FetchDataProfileEvent()),
+        create: (context) => ProfileBloc(ProfileReponstory(RestAPIClient()))..add(FetchDataProfileEvent()),
         child: BlocConsumer<ProfileBloc, ProfileState>(
           listener: (context, state) {
             if (state is ChangeProfileSuccess) {

@@ -1,9 +1,9 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:codebase/screens/filter_search_booking/filter_search_booking_repository.dart';
 import 'package:domain/models/site.dart';
 import 'package:domain/models/sites/filter_model.dart';
+import 'package:nsg_biolab_booking_app/screens/filter_search_booking/filter_search_booking_repository.dart';
 
 part 'filter_search_event.dart';
 part 'filter_search_state.dart';
@@ -25,8 +25,7 @@ class FilterSearchBloc extends Bloc<FilterSearchEvent, FilterSearchState> {
     on<ResetSiteRoomFilterEvent>(_onResetSiteRoomFilterEvent);
   }
 
-  FutureOr<void> _onFetchDataFilter(
-      FetchDataFilterEvent event, Emitter<FilterSearchState> emit) async {
+  FutureOr<void> _onFetchDataFilter(FetchDataFilterEvent event, Emitter<FilterSearchState> emit) async {
     try {
       final response = await filterSearchBookingRepository.getFilter();
       emit(FilterSearchSuccess(
@@ -168,13 +167,11 @@ class FilterSearchBloc extends Bloc<FilterSearchEvent, FilterSearchState> {
         listSite: state.listSite,
       ));
     } catch (e) {
-      emit(FilterSearchError(
-          listLevel: state.listLevel, listSite: state.listSite, errorMessage: e.toString()));
+      emit(FilterSearchError(listLevel: state.listLevel, listSite: state.listSite, errorMessage: e.toString()));
     }
   }
 
-  FutureOr<void> _onResetLevelFilterEvent(
-      ResetLevelFilterEvent event, Emitter<FilterSearchState> emit) {
+  FutureOr<void> _onResetLevelFilterEvent(ResetLevelFilterEvent event, Emitter<FilterSearchState> emit) {
     try {
       isCheckedLevel = List.generate(2, (index) => false);
       emit(FilterSearchSuccess(
@@ -190,8 +187,7 @@ class FilterSearchBloc extends Bloc<FilterSearchEvent, FilterSearchState> {
     }
   }
 
-  FutureOr<void> _onResetSiteRoomFilterEvent(
-      ResetSiteRoomFilterEvent event, Emitter<FilterSearchState> emit) {
+  FutureOr<void> _onResetSiteRoomFilterEvent(ResetSiteRoomFilterEvent event, Emitter<FilterSearchState> emit) {
     try {
       isCheckedRoom = List.generate(8, (index) => false);
       emit(FilterSearchSuccess(

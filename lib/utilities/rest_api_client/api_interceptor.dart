@@ -2,9 +2,9 @@ import 'dart:developer';
 
 import 'package:api/api_client/api_response.dart';
 import 'package:api/sessions/request/sessions_request.dart';
-import 'package:codebase/utilities/rest_api_client/api_client.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/models/sessions/login_model.dart';
+import 'package:nsg_biolab_booking_app/utilities/rest_api_client/api_client.dart';
 
 import '../shared_preferences/shared_preferences.dart';
 
@@ -16,10 +16,9 @@ class APIInterceptor extends QueuedInterceptor {
     if (token != null) {
       final String? tokenExpiredAt = await getTokenExpiredAt();
       if (tokenExpiredAt != null) {
-        final DateTime timeExpired = DateTime.parse(
-            '${tokenExpiredAt.substring(0, 10)} ${tokenExpiredAt.substring(11, 23)}');
+        final DateTime timeExpired =
+            DateTime.parse('${tokenExpiredAt.substring(0, 10)} ${tokenExpiredAt.substring(11, 23)}');
         final DateTime dateTimeNow = DateTime.now();
-
         if (timeExpired.compareTo(dateTimeNow) > 0) {
           try {
             final accessToken = await getToken();
@@ -38,7 +37,7 @@ class APIInterceptor extends QueuedInterceptor {
             final apiResponse = APIResponse.fromJson(response.data);
             final object = LoginModel.fromJson(apiResponse.data);
 
-            await setToken(object.token?? '');
+            await setToken(object.token ?? '');
           } catch (e) {
             log('token refesh failed!');
           }

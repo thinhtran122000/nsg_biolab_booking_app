@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:codebase/screens/favourite_booking/view/equipment/favourite_equipment_view.dart';
 import 'package:flutter/material.dart';
+import 'package:nsg_biolab_booking_app/screens/favourite_booking/view/equipment/favourite_equipment_view.dart';
 
 import '../view/meeting_room/favourite_meeting_room_view.dart';
 

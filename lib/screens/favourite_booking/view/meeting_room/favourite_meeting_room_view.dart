@@ -1,8 +1,8 @@
-import 'package:codebase/blocs/bloc/global_bloc.dart';
-import 'package:codebase/screens/favourite_booking/favourite_booking_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nsg_biolab_booking_app/blocs/bloc/global_bloc.dart';
+import 'package:nsg_biolab_booking_app/screens/favourite_booking/favourite_booking_repository.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_ui/shared_ui.dart';
 
@@ -19,8 +19,7 @@ class FavouriteMeetingRoomView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          MeetingRoomBloc(FavouriteBookingRepository(restApiClient: RestAPIClient()))
-            ..add(FetchDataMeetingRoomEvent()),
+          MeetingRoomBloc(FavouriteBookingRepository(restApiClient: RestAPIClient()))..add(FetchDataMeetingRoomEvent()),
       child: BlocListener<MeetingRoomBloc, MeetingRoomState>(
         listener: (context, state) {
           if (state is MeetingRoomSuccess) {
@@ -57,10 +56,8 @@ class FavouriteMeetingRoomView extends StatelessWidget {
                     enablePullDown: true,
                     header: MaterialClassicHeader(color: greenColor),
                     footer: const LoadMoreWidget(),
-                    onLoading: () =>
-                        context.read<MeetingRoomBloc>().add(LoadMoreMeetingRoomEvent()),
-                    onRefresh: () =>
-                        context.read<MeetingRoomBloc>().add(FetchDataMeetingRoomEvent()),
+                    onLoading: () => context.read<MeetingRoomBloc>().add(LoadMoreMeetingRoomEvent()),
+                    onRefresh: () => context.read<MeetingRoomBloc>().add(FetchDataMeetingRoomEvent()),
                     controller: localBloc.meetingRoomRefreshController,
                     child: SingleChildScrollView(
                       primary: true,
@@ -105,8 +102,7 @@ class FavouriteMeetingRoomView extends StatelessWidget {
     var localBloc = BlocProvider.of<MeetingRoomBloc>(context);
     var itemListMeetingRoom = globalBloc.state.listMeetingRoom[index];
     String nameMeetingRoom = itemListMeetingRoom.name ?? '';
-    Color? colorTagMeetingRoom =
-        Color(int.parse('0xff${itemListMeetingRoom.site?.colorTag?.replaceAll('#', '')}'));
+    Color? colorTagMeetingRoom = Color(int.parse('0xff${itemListMeetingRoom.site?.colorTag?.replaceAll('#', '')}'));
     String? levelMeetingRoom = itemListMeetingRoom.site?.level.toString();
     String? siteNameMeetingRoom = itemListMeetingRoom.site?.name;
     return ItemMeetingRoomWidget(
